@@ -1,0 +1,132 @@
+.resumepreview {
+  background: none;
+  width: 100%;
+  font-family: serif;
+}
+
+.personal-details {
+  text-align: center;
+  .name {
+    font-weight: bold;
+    font-size: 30px;
+  }
+  .title {
+    font-style: italic;
+  }
+  .links {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    a{
+      color: #551a8b;
+    }
+  }
+}
+
+.heading {
+  margin-top: 10px;
+  font-size: 20px;
+  color: #551a8b;
+  border-bottom: 1px solid #551a8b;
+  margin-bottom: 10px;
+}
+
+.summary {
+  padding-inline: 25px;
+  text-align: justify;
+  p{
+    margin-top: 5px !important;
+    margin-bottom: 0px !important;
+  }
+}
+
+.workexperience {
+  .company {
+    font-size: 15px;
+    font-weight: bold;
+    color: #551a8b;
+    margin-left: 10px;
+    padding-bottom: 5px;
+  }
+  .role {
+    font-weight: bold;
+    font-size: 15px;
+    margin-left: 25px;
+  }
+  .address {
+    font-size: 15px;
+    margin-left: 25px;
+    margin-bottom: 5px;
+  }
+  .description {
+    font-size: 15px;
+    margin-inline: 25px;
+    margin-bottom: 5px;
+    text-align: justify;
+    ol,
+    ul {
+      margin: 0;
+      padding-inline-start: 13px !important;
+    }
+    p {
+      margin: 0;
+    }
+  }
+}
+.education {
+  padding-inline: 25px;
+  .degree {
+    font-weight: bold;
+  }
+  .detail {
+    margin-bottom: 15px;
+  }
+}
+.skills {
+  padding-inline: 25px;
+  .skill {
+    font-weight: bold;
+    font-size: 16px;
+  }
+}
+.languages {
+  padding-inline: 25px;
+  .language {
+    font-size: 16px;
+  }
+}
+.achievement {
+  padding-inline: 25px;
+  padding-bottom: 5px;
+  .title {
+    font-weight: bold;
+  }
+  .title::before {
+    content: "\2192";
+    margin-right: 5px;
+    margin-left: -20px;
+  }
+}
+.projects {
+  padding-inline: 25px;
+  .name {
+    font-weight: bold;
+  }
+  .link a {
+    text-decoration: none;
+  }
+  .description {
+    font-size: 15px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    text-align: justify;
+    ol,
+    ul {
+      margin: 0;
+      padding-inline-start: 13px !important;
+    }
+    p {
+      margin: 0;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+.home{
+    background: url('../../assets/wave.svg');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    height: 100vh;
+    @media screen and (max-width:900px) {
+        height: auto;
+    }
+}
