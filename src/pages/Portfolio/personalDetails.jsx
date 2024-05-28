@@ -7,7 +7,7 @@ import "react-quill/dist/quill.snow.css";
 
 const PersonalDetailsForm = () => {
   const dispatch = useDispatch();
-  const personalDetails = useSelector((state) => state.resume.personalDetails);
+  const personalDetails = useSelector((state) => state.portfolio.personalDetails);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,10 +44,10 @@ const PersonalDetailsForm = () => {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              name="email"
-              label="Email"
+              name="motivation"
+              label="Motivation"
               fullWidth
-              value={personalDetails.email}
+              value={personalDetails.motivatoion}
               onChange={handleChange}
               required
             />
@@ -58,16 +58,6 @@ const PersonalDetailsForm = () => {
               label="Professional Title"
               fullWidth
               value={personalDetails.title}
-              onChange={handleChange}
-              required
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              name="phone"
-              label="Phone Number"
-              fullWidth
-              value={personalDetails.phone}
               onChange={handleChange}
               required
             />
@@ -88,16 +78,6 @@ const PersonalDetailsForm = () => {
               label="Linkedin"
               fullWidth
               value={personalDetails.linkedin}
-              onChange={handleChange}
-              required
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              name="address"
-              label="Address"
-              fullWidth
-              value={personalDetails.address}
               onChange={handleChange}
               required
             />

@@ -1,24 +1,26 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { TextField, Button, Grid, Typography, Container, InputLabel } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Grid,
+  Typography,
+  Container,
+  InputLabel,
+} from "@mui/material";
 import {
   addProject,
   updateProject,
   deleteProject,
-} from "../../redux/slices/resumeslice";
+} from "../../redux/slices/portfolioslice";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import ReactQuill from "react-quill";
-import 'react-quill/dist/quill.snow.css';
+import "react-quill/dist/quill.snow.css";
+import { MuiChipsInput } from "mui-chips-input";
 
 const ProjectsForm = () => {
   const dispatch = useDispatch();
-  const projects = useSelector((state) => state.resume.projects);
-
-  const [projectInput, setProjectInput] = useState({
-    name: "",
-    link: "",
-    description: "",
-  });
+  const projects = useSelector((state) => state.portfolio.projects);
 
   const handleChange = (e, index) => {
     const { name, value } = e.target;
@@ -30,27 +32,62 @@ const ProjectsForm = () => {
     dispatch(updateProject({ index, data: updatedProjects[index] }));
   };
 
+  const handleQuillChange = (value, index) => {
+    const updatedProjects = [...projects];
+    updatedProjects[index] = {
+      ...updatedProjects[index],
+      description: value,
+    };
+    dispatch(updateProject({ index, data: updatedProjects[index] }));
+  };
+
+  const handleSkillsChange = (newSkills, index) => {
+    const updatedProjects = [...projects];
+    updatedProjects[index] = {
+      ...updatedProjects[index],
+      skills: newSkills,
+    };
+    dispatch(updateProject({ index, data: updatedProjects[index] }));
+  };
+
+  const handleImageChange = (e, index) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const updatedProjects = [...projects];
+        updatedProjects[index] = {
+          ...updatedProjects[index],
+          image: reader.result,
+        };
+        dispatch(updateProject({ index, data: updatedProjects[index] }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleAddProject = () => {
     dispatch(
       addProject({
         name: "",
         link: "",
         description: "",
+        skills: [],
+        image: "",
       })
     );
   };
-
 
   const handleDeleteProject = (index) => {
     dispatch(deleteProject(index));
   };
 
-  const modules= {
-    toolbar: [[{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }]]
-  }
+  const modules = {
+    toolbar: [[{ list: "ordered" }, { list: "bullet" }, { list: "check" }]],
+  };
 
   return (
-    <>
+    <Container>
       {projects.map((project, index) => (
         <form key={index} style={{ marginBottom: "1rem" }}>
           <Typography
@@ -90,13 +127,25 @@ const ProjectsForm = () => {
                 modules={modules}
                 theme="snow"
                 value={project.description}
-                onChange={(value) =>
-                  handleChange(
-                    { target: { name: "description", value } },
-                    index
-                  )
-                }
+                onChange={(value) => handleQuillChange(value, index)}
               />
+            </Grid>
+            <Grid item xs={12}>
+              <InputLabel>Skills</InputLabel>
+              <MuiChipsInput
+                value={project.skills}
+                onChange={(newChips) => handleSkillsChange(newChips, index)}
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <InputLabel>Image</InputLabel>
+              <input
+                accept="image/*"
+                type="file"
+                onChange={(e) => handleImageChange(e, index)}
+              />
+              
             </Grid>
           </Grid>
         </form>
@@ -109,7 +158,7 @@ const ProjectsForm = () => {
       >
         Add Project
       </Button>
-    </>
+    </Container>
   );
 };
 

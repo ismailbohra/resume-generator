@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { thunk } from "redux-thunk";
 import resumeReducer from "./slices/resumeslice";
+import portfolioReducer from "./slices/portfolioslice";
 import { combineReducers } from "redux";
 
 const persistConfig = {
@@ -12,6 +13,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   resume: resumeReducer,
+  portfolio: portfolioReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

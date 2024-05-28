@@ -1,19 +1,26 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { TextField, Button, Grid, Typography, Container, Checkbox } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Grid,
+  Typography,
+  Container,
+  Checkbox,
+} from "@mui/material";
 import {
   addEducation,
   updateEducation,
   deleteEducation,
-} from "../../redux/slices/resumeslice";
+} from "../../redux/slices/portfolioslice";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 const EducationForm = () => {
   const dispatch = useDispatch();
-  const education = useSelector((state) => state.resume.education);
+  const education = useSelector((state) => state.portfolio.education);
 
   const handleChange = (e, index) => {
     const { name, value } = e.target;
@@ -35,16 +42,18 @@ const EducationForm = () => {
   };
 
   const handleAddEducation = () => {
+    const opt = {
+      title: "Higher Secondary School ",
+      description:
+        "Achieved two years higher secondary degree from Science major from a reputed institute.",
+      institute:
+        "Carmel Convent Senior Secondary School,Neemuch,Madhya Pradesh",
+      startDate: dayjs().format("YYYY-MM-DD"),
+      endDate: dayjs().format("YYYY-MM-DD"),
+      present:false
+    };
     dispatch(
-      addEducation({
-        institute: "",
-        degree: "",
-        startDate: dayjs().format("YYYY-MM-DD"),
-        endDate: dayjs().format("YYYY-MM-DD"),
-        present: false,
-        address:"",
-        detail:""
-      })
+      addEducation(opt)
     );
   };
 
@@ -65,9 +74,17 @@ const EducationForm = () => {
     <>
       {education.map((edu, index) => (
         <form key={index} style={{ marginBottom: "1rem" }}>
-          <Typography mb={3} style={{ display: "flex", justifyContent: "space-between" }}>
+          <Typography
+            mb={3}
+            style={{ display: "flex", justifyContent: "space-between" }}
+          >
             <span>Institute-{index + 1}</span>
-            <span><HighlightOffIcon sx={{cursor:"pointer"}} onClick={() => handleDeleteEducation(index)} /></span>
+            <span>
+              <HighlightOffIcon
+                sx={{ cursor: "pointer" }}
+                onClick={() => handleDeleteEducation(index)}
+              />
+            </span>
           </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -82,8 +99,8 @@ const EducationForm = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                name="degree"
-                label="Degree"
+                name="title"
+                label="Title"
                 fullWidth
                 value={edu.degree}
                 onChange={(e) => handleChange(e, index)}
@@ -126,7 +143,7 @@ const EducationForm = () => {
                           name="endDate"
                           fullWidth
                           disabled={edu.present}
-                          required={!edu.present} 
+                          required={!edu.present}
                         />
                       )}
                       showToolbar={false}
@@ -144,20 +161,20 @@ const EducationForm = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                name="address"
-                label="Address"
+                name="institute"
+                label="Institute"
                 fullWidth
-                value={edu.address}
+                value={edu.institute}
                 onChange={(e) => handleChange(e, index)}
                 required
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                name="detail"
-                label="details"
+                name="description"
+                label="Description"
                 fullWidth
-                value={edu.detail}
+                value={edu.description}
                 onChange={(e) => handleChange(e, index)}
                 required
               />
