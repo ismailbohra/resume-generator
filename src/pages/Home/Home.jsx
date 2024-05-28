@@ -32,20 +32,20 @@ export const Home = (props) => {
                 color={"blue"}
                 sx={{ fontSize: 40, fontWeight: "bold" }}
               >
-                & Portfolio Website
+                {/* & Portfolio Website */}
               </Typography>
               <Typography>Get a free resume in just 30 seconds </Typography>
               <Box sx={{ marginTop: 2 }}>
                 <Link to={"/resume"}>
-                  <Button sx={{ marginRight: 1 }} variant="contained">
-                    Resume
+                  <Button sx={{ bgcolor: "#F25C05" }} variant="contained">
+                    Get Started
                   </Button>
                 </Link>
-                <Link to={"/portfolio"}>
-                  <Button variant="contained" sx={{ bgcolor: "#F25C05" }}>
+                {/* <Link to={"/portfolio"}>
+                  <Button variant="contained" >
                     Portfolio Website
                   </Button>
-                </Link>
+                </Link> */}
               </Box>
             </Box>
           </Grid>

@@ -100,7 +100,7 @@ const WorkExperienceForm = () => {
                 name="role"
                 label="Role"
                 fullWidth
-                value={exp.position}
+                value={exp.role}
                 onChange={(e) => handleChange(e, index)}
                 required
               />
